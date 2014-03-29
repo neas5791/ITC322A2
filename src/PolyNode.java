@@ -51,6 +51,7 @@ public class PolyNode {
 	 */
 	public void add(double co, double ex){
 
+		// need to add some logic to deal with removing nodes with zero coefficients!!
 		if (exp == ex) {
 			coeff += co;
 			return;
@@ -103,5 +104,14 @@ public class PolyNode {
 		if (this.exp < term.exp)
 			return true;
 		return false;
+	}
+	
+	public String toString(){
+		if (exp == 0)
+			return String.format("%s", (int) coeff);
+		else if (exp == 1)
+			return String.format("%sx", (int) coeff);
+		else
+			return String.format("%sx^%s", (int) coeff, (int) exp);
 	}
 }
