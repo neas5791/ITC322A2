@@ -24,13 +24,7 @@ public class PolyBag {
 	public PolyBag(String equation)
 	{
 		manyNodes = 0;
-		
-		List<String []> polynomial = Formatter.FormatStripper(equation);
-		for (String[] x : polynomial)
-			if (head == null)
-				head = new PolyNode (Double.parseDouble(x[0]), Double.parseDouble(x[1]), head);
-			else
-				head.add(Double.parseDouble(x[0]), Double.parseDouble(x[1]));
+		BuildPolynomial(equation, this.head);
 	}
 	
 	public PolyBag(FileReader fileName){
@@ -60,24 +54,28 @@ public class PolyBag {
 		
 	}
 		   
-	
-	   /**
-	    * Put a reference to an object into this bag. The new element may be the
-	    * null reference.
-	    * @param element
-	    *   the new element to be added to this bag
-	    * @postcondition
-	    *   The element has been added to this bag.
-	    * @exception OutOfMemoryError
-	    *   Indicates insufficient memory a new Node.
-	    **/
-	    public void add(double coeff, double exp)
-	    {      
-	       head.add(coeff, exp);
-	       manyNodes++;
-	    }
+	/**
+	 * Builds the polynomial link list at a given location
+	 * @param equation the polynomial to represent as a linked list
+	 * @param nodeHead the location to add the list at
+	 * @postcondition the PolyBag has additional polynomial equation added
+	 */
+	public void BuildPolynomial(String equation, PolyNode nodeHead)
+	{
+		List<String []> polynomial = Formatter.FormatStripper(equation);
+		for (String[] x : polynomial)
+			if (nodeHead == null) {
+				nodeHead = new PolyNode (Double.parseDouble(x[0]), Double.parseDouble(x[1]), nodeHead);
+				manyNodes++;
+			}
+			else
+				nodeHead.insert(Double.parseDouble(x[0]), Double.parseDouble(x[1]));
+
+	}
 	    
-	    
+	public void insertPolynomial(String equation){
+		
+	}
 	    
 	
 }

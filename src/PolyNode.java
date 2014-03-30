@@ -1,3 +1,9 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class PolyNode {
 	
@@ -5,6 +11,23 @@ public class PolyNode {
 	private double exp;
 	private PolyNode link;
 	
+	/**
+	 * Constructs new Polynomial Linked list from equation passed from system.in
+	 * @param equation the polynomial expression to be placed into the linked list
+	 */
+	public PolyNode(String equation){
+		
+		List<String []> polynomial = Formatter.FormatStripper(equation);
+		boolean isHead = true;
+		for (String[] x : polynomial)
+			if (isHead) {
+				coeff = Double.parseDouble(x[0]);
+				exp = Double.parseDouble(x[1]);
+				isHead = false;
+			}
+			else
+				insert(Double.parseDouble(x[0]), Double.parseDouble(x[1]));
+	}
 	
 	/**
 	 * Constructor initializes object with coefficient and exponent values
@@ -26,7 +49,7 @@ public class PolyNode {
 	 * @param ex is the exponent factor of the polynomial term
 	 * @postcondition the list is increased in size and the new node is placed before the current node
 	 */
-	protected void addBefore(double co, double ex){
+	protected void insertBefore(double co, double ex){
 		link = new PolyNode(coeff, exp, link);
 		coeff = co;
 		exp = ex;
@@ -38,18 +61,17 @@ public class PolyNode {
 	 * @param ex is the exponent factor of the polynomial term
 	 * @postcondition the list is increased in size and the new term is placed after the current term
 	 */
-	protected void addAfter(double co, double ex){
+	protected void insertAfter(double co, double ex){
 		link = new PolyNode(co, ex, link);
 	}
 	
-	
 	/**
-	 * Extends the current list by adding the polynomial term in order of exponent (from largest to smallest)
+	 * Extends the current list by inserting the polynomial term in order of exponent (from largest to smallest)
 	 * @param co is the coefficient of the polynomial term
 	 * @param ex is the exponent factor of the polynomial term
 	 * @postcondition the list is increased in size and the new term is placed ascending order of exponent magnitude.
 	 */
-	public void add(double co, double ex){
+	public void insert(double co, double ex){
 
 		// need to add some logic to deal with removing nodes with zero coefficients!!
 		if (exp == ex) {
@@ -59,12 +81,12 @@ public class PolyNode {
 		
 		if (exp > ex){
 			if (link == null)
-				addAfter(co,ex);
+				insertAfter(co,ex);
 			else
-				link.add(co,ex);
+				link.insert(co,ex);
 		}
 		else
-			addBefore(co,ex);
+			insertBefore(co,ex);
 	}
 	
 	/**
@@ -107,11 +129,34 @@ public class PolyNode {
 	}
 	
 	public String toString(){
-		if (exp == 0)
-			return String.format("%s", (int) coeff);
-		else if (exp == 1)
-			return String.format("%sx", (int) coeff);
-		else
-			return String.format("%sx^%s", (int) coeff, (int) exp);
+		String result = "";
+		for (PolyNode cursor = this; cursor!=null; cursor = cursor.link){
+			if (cursor.exp == 0){
+				if(!String.format("%s", (int) cursor.coeff).matches("^[-]{1}\\d+"))
+					result = result + "+" + String.format("%s", (int) cursor.coeff);
+				else
+					result = result + String.format("%s", (int) cursor.coeff);
+			}
+			else if (cursor.exp == 1) {
+				if(!String.format("%sx", (int) cursor.coeff).matches("^[-]\\d*\\.?\\d*[a-zA-Z]*"))
+					result = result + "+" + String.format("%sx", (int) cursor.coeff);
+				else
+					result = result + String.format("%sx", (int) cursor.coeff);
+			}
+			else {
+				if(!String.format("%sx^%s", (int) cursor.coeff, (int) cursor.exp).matches("^[-]\\d*\\.?\\d*[a-zA-Z]*"))
+					result = result + "+" + String.format("%sx^%s", (int) cursor.coeff, (int) cursor.exp);
+				else 
+					result = result + String.format("%sx^%s", (int) cursor.coeff, (int) cursor.exp);
+			}
+		}
+		return result.replaceAll("^[+]", "");
+	}
+
+	public static PolyNode add(PolyNode equation){
+		PolyNode answer = new PolyNode(1,1,null);
+		
+		
+		return answer;
 	}
 }

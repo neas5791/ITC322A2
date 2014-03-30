@@ -1,11 +1,30 @@
+import java.util.*;
+
 
 public class Testing {
 
 	public static void main(String[] args) {
+		List<PolyNode> pList = new LinkedList<PolyNode>();
+		
+		PolyNode p1 = new PolyNode("2x^2+3x-10");
+		PolyNode p2 = new PolyNode("x^7-4x^6+3.5x^-2+91");
+		
+		pList.add(p1);
+		pList.add(p2);
+		
+		
+		//for (PolyNode cursor = p1; cursor != null; cursor = cursor.getLink())
+			System.out.printf("%s\t", p1.toString());
+		System.out.println();
+		//for (PolyNode cursor = p2; cursor != null; cursor = cursor.getLink())
+			System.out.printf("%s\t", p2.toString());
+		
+		
+		/*
 		PolyBag pb1 = new PolyBag("2x^2+3x-10");
 		PolyBag pb2 = new PolyBag("x^7-4x^6+3.5x^-2+91");
 		System.out.println(pb1.getClass());
-		
+		*/
 		
 		/*
 		PolyNode p1 = new PolyNode(1,3,null);
