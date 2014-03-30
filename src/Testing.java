@@ -13,8 +13,8 @@ public class Testing {
 		pList.add(p2);
 		
 		
-		//for (PolyNode cursor = p1; cursor != null; cursor = cursor.getLink())
-			System.out.printf("%s\t", p1.toString());
+		for (PolyNode cursor = p1; cursor != null; cursor = cursor.getLink())
+			System.out.printf("%s", cursor.tostring());
 		System.out.println();
 		//for (PolyNode cursor = p2; cursor != null; cursor = cursor.getLink())
 			System.out.printf("%s\t", p2.toString());

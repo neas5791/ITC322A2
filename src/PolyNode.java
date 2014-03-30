@@ -122,8 +122,59 @@ public class PolyNode {
 			return true;
 		return false;
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		String str;
+		if (exp == 0 && coeff > 0)
+			str = String.format(" + %s", (int) coeff);
+		else if (exp == 0 & coeff < 0)
+			str =  String.format(" - %s", (int) Math.abs(coeff));
+		else if (exp == 1 && coeff > 0) 
+			str = String.format(" + %sx", (int)coeff);
+		else if (exp == 1 && coeff < 0)
+			str = String.format(" - %sx", (int) Math.abs(coeff));
+		else if (exp > 1 && coeff > 1)
+			str = String.format(" + %sx^%s", (int) coeff, (int) exp);
+		else 
+			str = String.format(" - %sx^%s", (int) Math.abs(coeff), (int) exp);
+		
+		return str;
 	
-	public String toString(){
+	}
+	
+	/**
+	 * Preforms polynomial addition
+	 * The rules for the addition of polynomials are as follows:
+	 * 1. If the powers are equal, the coefficients are algebraically added.
+	 * 2. If the powers are unequal, the term with the higher power is inserted in the new polynomial.
+	 * 3. If the exponent is 0, it represents x0, which is 1. The value of the term is therefore the value 
+	 * of the coefficient.
+	 * 4. If the result of adding the coefficients results in 0, the term is dropped (0 times anything is 0).
+	 * 
+	 * For example, the polynomial sum 
+	 * 
+	 * 		(27x3+15x2+12x)+(18x2+10x+8)is calculated as (27x3+33x2+22x+8)
+	 *
+	 * @param equation the polynomial expression to be added
+	 * @return new  polynomial expression representing the result
+	 */
+	public PolyNode add(PolyNode equation){
+		PolyNode answer = new PolyNode(1,1,null);
+		
+		
+		return answer;
+	}
+	
+	
+	/**
+	 * toString Method that outputs the entire list rom this node on
+	 * @return
+	 */
+	public String tostring(){
 		String result = "";
 		for (PolyNode cursor = this; cursor!=null; cursor = cursor.link){
 			if (cursor.exp == 0){
@@ -146,12 +197,5 @@ public class PolyNode {
 			}
 		}
 		return result.replaceAll("^[+]", "");
-	}
-
-	public static PolyNode add(PolyNode equation){
-		PolyNode answer = new PolyNode(1,1,null);
-		
-		
-		return answer;
 	}
 }
