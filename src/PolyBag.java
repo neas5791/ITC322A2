@@ -13,6 +13,7 @@ public class PolyBag {
 	//      variable manyNodes.
 	
 	private PolyNode head;
+	@SuppressWarnings("unused")
 	private int manyNodes;
 	
 	/**
