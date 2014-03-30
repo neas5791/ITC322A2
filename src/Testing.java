@@ -2,7 +2,12 @@
 public class Testing {
 
 	public static void main(String[] args) {
+		PolyBag pb1 = new PolyBag("2x^2+3x-10");
+		PolyBag pb2 = new PolyBag("x^7-4x^6+3.5x^-2+91");
+		System.out.println(pb1.getClass());
 		
+		
+		/*
 		PolyNode p1 = new PolyNode(1,3,null);
 		
 		// test sorting of polynomial term
@@ -33,7 +38,7 @@ public class Testing {
 			test = false;
 			cursor = cursor.getLink();
 		}
-
+*/
 	}
 
 }
