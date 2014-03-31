@@ -6,7 +6,8 @@ import java.util.List;
 public class Formatter {
 	
 	public static List<String[]> FormatStripper(String equation){
-		// these are the individual terms of the polynomial equation
+		// this array represent the coefficient and exponent data for 
+		// the individual terms of the polynomial equation
 		String[] terms;
 		// List of String[] containing the coefficient and exponent data
 		// Corresponding to the equation string passed in
@@ -14,7 +15,6 @@ public class Formatter {
 
 		try
 		{
-			
 			// to simplify splitting changed all negative to +-
 			// (?<!\\^) makes sure that any exponent values are not changed
 			equation = equation.replaceAll("(?<!\\^)[-]", "+-"); 

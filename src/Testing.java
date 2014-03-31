@@ -4,6 +4,10 @@ import java.util.*;
 public class Testing {
 
 	public static void main(String[] args) {
+		
+		
+		
+		
 		List<PolyNode> pList = new LinkedList<PolyNode>();
 		
 		PolyNode p1 = new PolyNode("2x^2+3x-10");
